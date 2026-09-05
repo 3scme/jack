@@ -1,0 +1,638 @@
+:root {
+  color-scheme: light;
+
+  --paper: #e9e1cb;
+  --paper-dark: #d7cdb4;
+  --ink: #29271f;
+  --faded-ink: #595548;
+  --pencil: #676258;
+  --red-pencil: #8a3d32;
+  --desk: #35322b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  min-height: 100%;
+  background: var(--desk);
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.025),
+      transparent 40%
+    ),
+    #35322b;
+
+  color: var(--ink);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+button {
+  font: inherit;
+}
+
+.book {
+  width: 100%;
+  min-height: 100dvh;
+
+  padding:
+    max(2.5rem, env(safe-area-inset-top))
+    1.5rem
+    max(2.5rem, env(safe-area-inset-bottom));
+}
+
+.page {
+  position: relative;
+
+  width: min(100%, 760px);
+  margin: 0 auto;
+
+  padding: 3.5rem 4rem 2rem;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(91, 68, 30, 0.055),
+      transparent 17%
+    ),
+    radial-gradient(
+      circle at 84% 42%,
+      rgba(104, 78, 41, 0.035),
+      transparent 21%
+    ),
+    linear-gradient(
+      91deg,
+      transparent 49.5%,
+      rgba(64, 54, 35, 0.018) 50%,
+      transparent 50.5%
+    ),
+    var(--paper);
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.32),
+    0 20px 60px rgba(0, 0, 0, 0.26);
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 31px,
+      rgba(70, 64, 47, 0.025) 32px
+    );
+
+  mix-blend-mode: multiply;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2.7rem;
+
+  width: 1px;
+
+  background: rgba(150, 73, 60, 0.16);
+
+  pointer-events: none;
+}
+
+.field-header {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: start;
+  gap: 1.4rem;
+}
+
+.stamp {
+  border: 2px solid rgba(43, 42, 35, 0.58);
+
+  padding: 0.55rem 0.65rem;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.72rem;
+  line-height: 1.35;
+  letter-spacing: 0.08em;
+
+  transform: rotate(-1deg);
+}
+
+.identity {
+  padding-top: 0.1rem;
+}
+
+.small-label {
+  margin: 0 0 0.25rem;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+}
+
+.identity h1 {
+  margin: 0;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: clamp(1.7rem, 4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.identity > p:last-child {
+  margin: 0.3rem 0 0;
+
+  color: var(--faded-ink);
+
+  font-size: 0.83rem;
+}
+
+.year {
+  padding-top: 0.15rem;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+}
+
+.rule {
+  position: relative;
+  z-index: 1;
+
+  height: 1px;
+
+  margin: 1.8rem 0 1.2rem;
+
+  background: rgba(43, 39, 28, 0.46);
+}
+
+.assignment {
+  position: relative;
+  z-index: 1;
+
+  margin-bottom: 2.8rem;
+
+  font-family:
+    "Courier New",
+    monospace;
+}
+
+.assignment dl {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem 2rem;
+
+  margin: 0;
+}
+
+.assignment dl > div {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+}
+
+.assignment dt {
+  color: var(--faded-ink);
+
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+.assignment dd {
+  margin: 0;
+
+  font-size: 0.78rem;
+}
+
+.entry {
+  position: relative;
+  z-index: 1;
+
+  margin: 0 0 2.4rem;
+}
+
+.entry-date {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.35rem;
+
+  border-bottom: 1px solid rgba(46, 43, 33, 0.34);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+}
+
+.entry p {
+  max-width: 92%;
+
+  margin: 0 0 0.85rem;
+
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.pencil-note {
+  position: absolute;
+
+  color: var(--pencil);
+
+  font-family:
+    "Comic Sans MS",
+    "Bradley Hand",
+    cursive;
+
+  font-size: 0.8rem;
+  line-height: 1.25;
+
+  opacity: 0.75;
+}
+
+.note-one {
+  right: -0.4rem;
+  bottom: -1rem;
+
+  transform: rotate(-5deg);
+}
+
+.note-two {
+  right: 0;
+  bottom: -0.7rem;
+
+  transform: rotate(3deg);
+}
+
+.measurements {
+  position: relative;
+  z-index: 1;
+
+  margin: 2.7rem 0;
+}
+
+.measurements table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.72rem;
+}
+
+.measurements th,
+.measurements td {
+  border: 1px solid rgba(56, 52, 40, 0.35);
+
+  padding: 0.5rem 0.6rem;
+
+  text-align: left;
+}
+
+.measurements th {
+  width: 17%;
+
+  color: var(--faded-ink);
+
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+.sketch-block {
+  position: relative;
+  z-index: 1;
+
+  margin: 3rem 0;
+
+  transform: rotate(-0.25deg);
+}
+
+.sketch-title {
+  margin-bottom: 0.5rem;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+}
+
+.sketch-block svg {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  border-top: 1px solid rgba(42, 40, 31, 0.26);
+  border-bottom: 1px solid rgba(42, 40, 31, 0.26);
+}
+
+.sketch-block svg path,
+.sketch-block svg line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contours path {
+  stroke: rgba(69, 66, 57, 0.28);
+  stroke-width: 1.1;
+}
+
+.creek {
+  stroke: rgba(60, 61, 57, 0.62);
+  stroke-width: 2;
+}
+
+.route {
+  stroke: rgba(50, 47, 38, 0.78);
+  stroke-width: 2.2;
+  stroke-dasharray: 9 6;
+}
+
+.station {
+  fill: rgba(42, 39, 30, 0.82);
+}
+
+.sketch-block text {
+  fill: rgba(56, 52, 42, 0.76);
+
+  font-family:
+    "Comic Sans MS",
+    "Bradley Hand",
+    cursive;
+
+  font-size: 15px;
+}
+
+.marker line {
+  stroke: var(--red-pencil);
+  stroke-width: 2;
+}
+
+.marker text {
+  fill: var(--red-pencil);
+}
+
+.red-note {
+  position: absolute;
+  right: 3%;
+  bottom: 4%;
+
+  color: var(--red-pencil);
+
+  font-family:
+    "Comic Sans MS",
+    "Bradley Hand",
+    cursive;
+
+  font-size: 0.9rem;
+
+  transform: rotate(-7deg);
+}
+
+.second-entry {
+  margin-top: 3rem;
+}
+
+.specimens {
+  position: relative;
+  z-index: 1;
+
+  margin: 3rem 0;
+}
+
+.section-label {
+  margin-bottom: 0.8rem;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+}
+
+.sample-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  border-top: 1px solid rgba(50, 47, 37, 0.35);
+  border-left: 1px solid rgba(50, 47, 37, 0.35);
+}
+
+.sample-grid > div {
+  padding: 0.7rem;
+
+  border-right: 1px solid rgba(50, 47, 37, 0.35);
+  border-bottom: 1px solid rgba(50, 47, 37, 0.35);
+
+  font-size: 0.78rem;
+}
+
+.sample-grid span {
+  display: block;
+
+  margin-bottom: 0.2rem;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.67rem;
+  font-weight: bold;
+}
+
+.final-entry {
+  margin-top: 3.2rem;
+}
+
+.short-entry {
+  margin-top: 1.6rem !important;
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.92rem !important;
+}
+
+.closing-mark {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 4rem;
+  padding-top: 0.5rem;
+
+  border-top: 1px solid rgba(45, 42, 32, 0.32);
+
+  color: rgba(52, 48, 38, 0.68);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.68rem;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+
+  margin-top: 3rem;
+
+  text-align: center;
+}
+
+[data-contact] {
+  appearance: none;
+
+  border: 0;
+  border-bottom: 1px solid rgba(44, 41, 32, 0.35);
+
+  padding: 0 0 0.12rem;
+
+  background: transparent;
+  color: rgba(44, 41, 32, 0.56);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+}
+
+[data-contact]:hover,
+[data-contact]:focus-visible {
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  body {
+    background: var(--paper);
+  }
+
+  .book {
+    padding:
+      env(safe-area-inset-top)
+      0
+      env(safe-area-inset-bottom);
+  }
+
+  .page {
+    width: 100%;
+    min-height: 100dvh;
+
+    margin: 0;
+
+    padding:
+      2.2rem
+      1.35rem
+      1.8rem;
+
+    box-shadow: none;
+  }
+
+  .page::after {
+    left: 0.72rem;
+  }
+
+  .field-header {
+    grid-template-columns: 82px 1fr;
+    gap: 1rem;
+  }
+
+  .year {
+    grid-column: 2;
+    grid-row: 2;
+
+    padding: 0;
+    margin-top: -0.45rem;
+  }
+
+  .stamp {
+    font-size: 0.61rem;
+  }
+
+  .assignment dl {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  .entry p {
+    max-width: 100%;
+  }
+
+  .pencil-note {
+    position: static;
+    display: block;
+
+    width: fit-content;
+
+    margin: 0.8rem 0 0 auto;
+  }
+
+  .measurements {
+    overflow-x: auto;
+  }
+
+  .measurements table {
+    min-width: 470px;
+  }
+
+  .sketch-block {
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+}
