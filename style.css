@@ -558,6 +558,39 @@ footer {
   color: var(--ink);
 }
 
+.archive-links {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+
+  margin-top: 3.2rem;
+
+  color: rgba(52, 48, 38, 0.42);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+}
+
+.archive-links a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18rem;
+}
+
+.archive-links a:hover,
+.archive-links a:focus-visible {
+  color: rgba(42, 39, 30, 0.82);
+}
+
 @media (max-width: 640px) {
   body {
     background: var(--paper);
